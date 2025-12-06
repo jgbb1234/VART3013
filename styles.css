@@ -175,9 +175,10 @@ p {
     border-left: 3px solid #00b4d8;
     font-family: 'Courier New', monospace;
     font-size: 0.85rem;
-    white-space: pre-wrap;
-    word-break: break-word;
+    white-space: pre;
+    overflow-x: auto;
     color: #90e0ef;
+    line-height: 1.4;
 }
 
 .art-note {
