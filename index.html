@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmonic Fields: Math → Code → Art</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="canvas-container">
+        <canvas id="shader-canvas"></canvas>
+        <div id="fps-counter">FPS: 60</div>
+    </div>
+
+    <div id="sidebar">
+        <button id="toggle-sidebar">◀</button>
+        
+        <h1>Harmonic Fields</h1>
+        <div class="subtitle">by John Boyd</div>
+        <div class="subtitle">The Intersection of Art and Science</div>
+        <div class="subtitle">Mathematics → Code → Visual Art</div>
+        
+        <!-- Section 1: Mathematical Foundation -->
+        <h2 id="math-header" class="expanded">1. The Mathematical Foundation</h2>
+        <div id="math-content" class="section-content expanded">
+            <p><strong>Sine Waves & Trigonometry:</strong><br>
+            The visual patterns are created by sine and cosine functions. These trigonometric functions describe periodic oscillations - the same mathematics that describes sound waves, light waves, and planetary motion.</p>
+            
+            <div class="math-formula">
+                // Sine wave equation
+                y = sin(x)
+                
+                // Applied to pixel coordinates
+                color = sin(distance × frequency + time)
+            </div>
+            
+            <p><strong>Distance Fields:</strong><br>
+            We calculate each pixel's distance from the center using the Pythagorean theorem, creating concentric circles radiating from the center.</p>
+            
+            <div class="math-formula">
+                // Pythagorean theorem
+                r = √(x² + y²)
+                
+                // Wave pattern based on distance
+                pattern = sin(r × 10.0 + time)
+            </div>
+            
+            <p><strong>Complex Numbers (Fractal Shader):</strong><br>
+            The fractal shader uses complex number arithmetic (z = z² + c) to create infinitely detailed, self-similar patterns (Mandelbrot set).</p>
+            
+            <div class="diagram">
+                Complex Plane:
+                
+                Imaginary ↑
+                │   • (x + yi)
+                │    \
+                │     \ r = √(x² + y²)
+                │      \
+                └─────────→ Real
+                        θ = atan2(y, x)
+            </div>
+        </div>
+        
+        <!-- Section 2: Computer Science Concepts -->
+        <h2 id="cs-header">2. The Computer Science Concepts</h2>
+        <div id="cs-content" class="section-content">
+            <p><strong>GPU Parallelism:</strong><br>
+            Unlike normal CPU code that runs sequentially, fragment shaders run in parallel on your graphics card. Each of the millions of pixels calculates its color simultaneously at 60+ frames per second.</p>
+            
+            <div class="code-example">
+                // Fragment shader runs for EVERY pixel simultaneously
+                void main() {
+                    // This code runs in parallel for millions of pixels
+                    vec2 uv = gl_FragCoord.xy / u_resolution;
+                    float color = calculatePattern(uv);
+                    gl_FragColor = vec4(color, color, color, 1.0);
+                }
+            </div>
+            
+            <p><strong>The Rendering Pipeline:</strong></p>
+            <div class="diagram">
+                1. Vertex Shader
+                   ↓
+                2. Rasterization
+                   ↓
+                3. Fragment Shader ← Our code runs here!
+                   ↓
+                4. Frame Buffer
+                   ↓
+                5. Screen Display
+            </div>
+            
+            <p><strong>Vector Mathematics:</strong><br>
+            GLSL is built around vectors (vec2, vec3, vec4), allowing efficient mathematical operations on coordinates and colors. The GPU is optimized for this type of computation.</p>
+            
+            <div class="code-example">
+                // Vector operations in GLSL
+                vec2 position = vec2(x, y);
+                vec3 color = vec3(r, g, b);
+                
+                // Entire vectors can be operated on at once
+                color = normalize(color) * brightness;
+                position = rotate(position, angle);
+            </div>
+        </div>
+        
+        <!-- Section 3: Fine Art Perspective -->
+        <h2 id="art-header">3. The Fine Art Perspective</h2>
+        <div id="art-content" class="section-content">
+            <p><strong>Composition:</strong><br>
+            Radial symmetry creates a focal point at the center, guiding the viewer's eye. The wave patterns create rhythm and movement, while color gradients establish mood and emotional tone.</p>
+            
+            <p><strong>Color Theory:</strong><br>
+            Each palette creates a different emotional response:</p>
+            
+            <div class="color-palette-grid">
+                <div class="color-item">
+                    <div class="color-swatch" style="background: linear-gradient(90deg, #ff7e5f, #8a2be2);"></div>
+                    <div class="color-label">Purple/Teal</div>
+                    <div class="color-emotion">Mysterious, technological</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: linear-gradient(90deg, #00b4d8, #9d4edd);"></div>
+                    <div class="color-label">Blue/Purple</div>
+                    <div class="color-emotion">Calm, atmospheric</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: linear-gradient(90deg, #ff9e00, #ff2e63);"></div>
+                    <div class="color-label">Orange/Pink</div>
+                    <div class="color-emotion">Energetic, vibrant</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: linear-gradient(90deg, #06d6a0, #118ab2);"></div>
+                    <div class="color-label">Green/Blue</div>
+                    <div class="color-emotion">Organic, natural</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: linear-gradient(90deg, #f72585, #7209b7);"></div>
+                    <div class="color-label">Pink/Purple</div>
+                    <div class="color-emotion">Romantic, psychedelic</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: linear-gradient(90deg, #ffd166, #ef476f);"></div>
+                    <div class="color-label">Yellow/Red</div>
+                    <div class="color-emotion">Fiery, intense</div>
+                </div>
+            </div>
+            
+            <p><strong>Abstraction:</strong><br>
+            The work doesn't represent physical objects but mathematical relationships, placing it in the tradition of abstract expressionism where form, color, and composition are the subject matter.</p>
+            
+            <div class="art-note">
+                "Abstraction allows the mathematical relationships to become the subject itself, rather than a representation of something else."
+            </div>
+            
+                        <p><strong>Process Over Product:</strong><br>
+This work emphasizes the artistic process itself - the algorithms, transformations, and generative rules - rather than creating a static final product. Like process art of the 1960s-70s, the artwork's value lies in its making and the systems that create it, inviting viewers to contemplate how beauty emerges from procedure.</p>
+
+            <p><strong>Systems Aesthetics:</strong><br>
+The piece exemplifies Jack Burnham's concept of "systems aesthetics" - where art is understood as a dynamic, interactive system rather than a static object. The mathematical rules, computational processes, and viewer interaction form an integrated system that generates aesthetic experience through feedback and transformation.</p>
+
+<p><strong>Digital Materiality:</strong><br>
+The work explores the unique material properties of digital media: real-time computation, algorithmic generation, and procedural transformation. Unlike traditional materials, code allows for infinite variation and precise mathematical control, creating a new kind of digital "material" that is both structured and fluid.</p>
+
+
+<p><strong>Interactive Aesthetics:</strong><br>
+The work transforms viewers into participants who shape the artwork through their interactions. This aligns with participatory art traditions while leveraging digital technology to create immediate, responsive systems where aesthetic experience emerges from dialogue between user and algorithm.</p>
+
+        </div>
+        
+
+
+
+
+
+        
+        <!-- Section 4: Math → Code → Art -->
+        <h2 id="process-header">4. Math → Code → Art</h2>
+        <div id="process-content" class="section-content">
+            <div class="concept-flow">
+                <div class="flow-step">
+                    <div class="flow-number">1</div>
+                    <strong>Mathematical Concept</strong>
+                    <p>Pure relationships: y = sin(x), r = √(x²+y²)</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-number">2</div>
+                    <strong>Algorithmic Translation</strong>
+                    <p>For each pixel: calculate, transform, color</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-number">3</div>
+                    <strong>Aesthetic Decisions</strong>
+                    <p>Color, composition, timing, emotion</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-number">4</div>
+                    <strong>Emergent Beauty</strong>
+                    <p>Simple rules → complex organic visuals</p>
+                </div>
+            </div>
+            
+            <p><strong>Step 1: Mathematical Foundation</strong><br>
+            We start with pure mathematical relationships that describe wave patterns, distances, and rotations.</p>
+            
+            <p><strong>Step 2: Algorithmic Translation</strong><br>
+            These formulas become code that runs on the GPU, calculating colors for each pixel based on mathematical operations.</p>
+            
+            <div class="code-example">
+                // Algorithmic translation example
+                for each pixel (x, y):
+                    distance = sqrt(x*x + y*y)
+                    wave = sin(distance * frequency + time)
+                    color = map_to_gradient(wave)
+            </div>
+            
+            <p><strong>Step 3: Aesthetic Decisions</strong><br>
+            Artistic choices transform the mathematical output: Which color palette? What animation speed? Which composition creates the desired emotional response?</p>
+            
+            <div class="art-note">
+                "The artist's role shifts from direct creation to designing systems that create beauty."
+            </div>
+            
+            <p><strong>Step 4: Emergent Beauty</strong><br>
+            Simple mathematical rules combine through parallel computation to create complex, organic-seeming visuals that feel alive and dynamic.</p>
+            
+            <p>This process demonstrates how mathematics provides the vocabulary, code provides the translation, and artistic sensibility provides the direction - resulting in a new form of digital art.</p>
+        </div>
+        
+        <!-- Interactive Controls Section -->
+        <div class="controls">
+            <h2 style="border: none; margin-top: 0; cursor: default;">Interactive Controls</h2>
+            
+            <div class="slider-container">
+                <label for="frequency">Wave Frequency: <span id="freq-value" class="value-display">10.0</span></label>
+                <input type="range" id="frequency" min="1" max="50" value="10" step="0.1">
+            </div>
+            
+            <div class="slider-container">
+                <label for="speed">Animation Speed: <span id="speed-value" class="value-display">1.0</span></label>
+                <input type="range" id="speed" min="0" max="5" value="1" step="0.1">
+            </div>
+            
+            <div class="slider-container">
+                <label for="complexity">Pattern Complexity: <span id="complex-value" class="value-display">2.0</span></label>
+                <input type="range" id="complexity" min="1" max="10" value="2" step="0.1">
+            </div>
+            
+            <label for="shader-select">Shader Type:</label>
+            <select id="shader-select">
+                <option value="harmonic">Harmonic Waves (Sine/Distance)</option>
+                <option value="fractal">Fractal Distortion (Complex Numbers)</option>
+                <option value="radial">Radial Symmetry (Trigonometry)</option>
+                <option value="voronoi">Voronoi Cells (Distance Fields)</option>
+            </select>
+            
+            <div style="margin-top: 1.5rem;">
+                <label>Color Palettes:</label>
+                <div class="palette-options">
+                    <div class="palette active" id="palette-1" data-colors="0.5,0.2,0.9,0.0,0.8,0.5"></div>
+                    <div class="palette" id="palette-2" data-colors="0.0,0.7,0.85,0.62,0.31,0.85"></div>
+                    <div class="palette" id="palette-3" data-colors="1.0,0.62,0.0,1.0,0.18,0.39"></div>
+                    <div class="palette" id="palette-4" data-colors="0.02,0.84,0.63,0.07,0.53,0.7"></div>
+                    <div class="palette" id="palette-5" data-colors="0.97,0.15,0.52,0.45,0.04,0.72"></div>
+                    <div class="palette" id="palette-6" data-colors="1.0,0.82,0.4,0.94,0.28,0.44"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WebGL Shaders -->
+    <script id="vertex-shader" type="x-shader/x-vertex">
+        attribute vec2 a_position;
+        varying vec2 v_uv;
+        
+        void main() {
+            gl_Position = vec4(a_position, 0.0, 1.0);
+            v_uv = a_position * 0.5 + 0.5;
+        }
+    </script>
+
+    <script id="harmonic-fragment" type="x-shader/x-fragment">
+        precision highp float;
+        
+        uniform float u_time;
+        uniform float u_frequency;
+        uniform float u_speed;
+        uniform float u_complexity;
+        uniform vec3 u_color1;
+        uniform vec3 u_color2;
+        uniform vec2 u_resolution;
+        varying vec2 v_uv;
+        
+        void main() {
+            vec2 uv = (v_uv - 0.5) * 2.0;
+            uv.x *= u_resolution.x / u_resolution.y;
+            
+            float distance = length(uv);
+            float angle = atan(uv.y, uv.x);
+            
+            float wave1 = sin(distance * u_frequency + u_time * u_speed);
+            float wave2 = cos(distance * u_frequency * 1.618 + u_time * u_speed * 0.618);
+            float wave3 = sin(angle * 5.0 + u_time * 0.5);
+            
+            float pattern = sin(wave1 * u_complexity + wave2 * 2.0 + wave3) * 0.5 + 0.5;
+            float radial = 1.0 - smoothstep(0.0, 1.4, distance);
+            float finalPattern = pattern * radial;
+            
+            vec3 color = mix(u_color1, u_color2, finalPattern);
+            color += vec3(0.1) * sin(finalPattern * 10.0 + u_time);
+            
+            gl_FragColor = vec4(color, 1.0);
+        }
+    </script>
+
+    <script id="fractal-fragment" type="x-shader/x-fragment">
+        precision highp float;
+        
+        uniform float u_time;
+        uniform float u_frequency;
+        uniform float u_speed;
+        uniform float u_complexity;
+        uniform vec3 u_color1;
+        uniform vec3 u_color2;
+        uniform vec2 u_resolution;
+        varying vec2 v_uv;
+        
+        void main() {
+            vec2 uv = (v_uv - 0.5) * 3.0;
+            uv.x *= u_resolution.x / u_resolution.y;
+            
+            float zoom = 1.0 + sin(u_time * 0.3) * 0.5;
+            vec2 c = uv * zoom;
+            vec2 z = vec2(0.0);
+            
+            float iteration = 0.0;
+            const float MAX_ITER = 50.0;
+            
+            for(float i = 0.0; i < MAX_ITER; i++) {
+                z = vec2(z.x*z.x - z.y*z.y, 2.0*z.x*z.y) + c;
+                
+                if(length(z) > 2.0) {
+                    iteration = i / MAX_ITER;
+                    break;
+                }
+            }
+            
+            float t = iteration;
+            vec3 color = mix(u_color1, u_color2, t);
+            color = mix(color, color.gbr, sin(u_time * 0.5) * 0.1 + 0.1);
+            
+            gl_FragColor = vec4(color, 1.0);
+        }
+    </script>
+
+    <script id="radial-fragment" type="x-shader/x-fragment">
+        precision highp float;
+        
+        uniform float u_time;
+        uniform float u_frequency;
+        uniform float u_speed;
+        uniform float u_complexity;
+        uniform vec3 u_color1;
+        uniform vec3 u_color2;
+        uniform vec2 u_resolution;
+        varying vec2 v_uv;
+        
+        void main() {
+            vec2 uv = v_uv - 0.5;
+            uv.x *= u_resolution.x / u_resolution.y;
+            
+            float r = length(uv);
+            float a = atan(uv.y, uv.x);
+            
+            float pattern = sin(r * u_frequency * 10.0 - u_time * u_speed);
+            pattern += sin(a * u_complexity * 5.0);
+            pattern += sin(r * 20.0 + a * 10.0 + u_time);
+            pattern = pattern * 0.33 + 0.5;
+            
+            vec3 color = mix(u_color1, u_color2, pattern);
+            color *= 1.0 - r * 0.7;
+            
+            gl_FragColor = vec4(color, 1.0);
+        }
+    </script>
+
+    <script id="voronoi-fragment" type="x-shader/x-fragment">
+        precision highp float;
+        
+        uniform float u_time;
+        uniform float u_frequency;
+        uniform float u_speed;
+        uniform float u_complexity;
+        uniform vec3 u_color1;
+        uniform vec3 u_color2;
+        uniform vec2 u_resolution;
+        varying vec2 v_uv;
+        
+        float random(vec2 st) {
+            return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+        }
+        
+        void main() {
+            vec2 uv = v_uv * u_frequency;
+            
+            vec2 iuv = floor(uv);
+            vec2 fuv = fract(uv);
+            
+            float minDist = 1.0;
+            vec2 minPoint = vec2(0.0);
+            
+            for(int y = -1; y <= 1; y++) {
+                for(int x = -1; x <= 1; x++) {
+                    vec2 neighbor = vec2(float(x), float(y));
+                    vec2 point = random(iuv + neighbor);
+                    point = 0.5 + 0.5 * sin(u_time * u_speed + 6.2831 * point);
+                    
+                    vec2 diff = neighbor + point - fuv;
+                    float dist = length(diff);
+                    
+                    if(dist < minDist) {
+                        minDist = dist;
+                        minPoint = point;
+                    }
+                }
+            }
+            
+            float value = minDist * u_complexity;
+            vec3 color = mix(u_color1, u_color2, value);
+            color = mix(color, vec3(1.0), 1.0 - smoothstep(0.0, 0.1, minDist * 4.0));
+            
+            gl_FragColor = vec4(color, 1.0);
+        }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
