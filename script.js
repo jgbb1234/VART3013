@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Color palettes (RGB values)
     const colorPalettes = [
-        {color1: [0.5, 0.2, 0.9], color2: [0.0, 0.8, 0.5]},
+        {color1: [1.0, 0.49, 0.37], color2: [0.54, 0.17, 0.89]},  
         {color1: [0.0, 0.7, 0.85], color2: [0.62, 0.31, 0.85]},
         {color1: [1.0, 0.62, 0.0], color2: [1.0, 0.18, 0.39]},
         {color1: [0.02, 0.84, 0.63], color2: [0.07, 0.53, 0.7]},
