@@ -399,38 +399,40 @@ The work transforms viewers into participants who shape the artwork through thei
         uniform vec2 u_resolution;
         varying vec2 v_uv;
         
-        float random(vec2 st) {
-            return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+        vec2 random2(vec2 st) {
+            st = vec2(dot(st, vec2(127.1, 311.7)),
+                     dot(st, vec2(269.5, 183.3)));
+            return fract(sin(st) * 43758.5453123);
         }
         
         void main() {
-            vec2 uv = v_uv * u_frequency;
+            vec2 uv = (v_uv - 0.5) * 2.0;
+            uv.x *= u_resolution.x / u_resolution.y;
+            uv = uv * u_frequency * 0.5;
             
             vec2 iuv = floor(uv);
             vec2 fuv = fract(uv);
             
-            float minDist = 1.0;
-            vec2 minPoint = vec2(0.0);
+            float minDist = 10.0;
             
-            for(int y = -1; y <= 1; y++) {
-                for(int x = -1; x <= 1; x++) {
-                    vec2 neighbor = vec2(float(x), float(y));
-                    vec2 point = random(iuv + neighbor);
+            for(float y = -1.0; y <= 1.0; y += 1.0) {
+                for(float x = -1.0; x <= 1.0; x += 1.0) {
+                    vec2 neighbor = vec2(x, y);
+                    vec2 point = random2(iuv + neighbor);
                     point = 0.5 + 0.5 * sin(u_time * u_speed + 6.2831 * point);
                     
                     vec2 diff = neighbor + point - fuv;
                     float dist = length(diff);
                     
-                    if(dist < minDist) {
-                        minDist = dist;
-                        minPoint = point;
-                    }
+                    minDist = min(minDist, dist);
                 }
             }
             
-            float value = minDist * u_complexity;
+            float value = smoothstep(0.0, 0.5, minDist * u_complexity * 0.5);
             vec3 color = mix(u_color1, u_color2, value);
-            color = mix(color, vec3(1.0), 1.0 - smoothstep(0.0, 0.1, minDist * 4.0));
+            
+            float edge = smoothstep(0.02, 0.03, minDist);
+            color = mix(vec3(1.0), color, edge);
             
             gl_FragColor = vec4(color, 1.0);
         }
